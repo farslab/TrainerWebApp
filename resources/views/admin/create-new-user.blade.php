@@ -2,36 +2,7 @@
 @section('title','Yeni Kullanıcı Oluştur')
 @section('content')
    
-    <!-- Content Header (Page header) -->
-    <div class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1 class="m-0 ">Yeni Kullanıcı Oluştur</h1>
-                </div>
-                <!-- /.col -->
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-
-                        <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                {{auth()->user()->name}}
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="/logout">Logout</a>
-                                <a class="dropdown-item" href="/profile">Profile</a>
-                                <a class="dropdown-item" href="#">Something Else</a>
-                                <!-- Add more items as needed -->
-                            </div>
-                        </div>
-
-                    </ol>
-                </div>
-            </div>
-        </div>
-    </div>
-
+    
     <div class="container">
         <ul class="nav nav-tabs" id="myTabs">
             <li class="nav-item">
