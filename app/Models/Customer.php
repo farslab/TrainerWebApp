@@ -17,6 +17,7 @@ class Customer extends Model
         'birth_date',
         'gender',
         'phone_number',
+        'pp_path',
     ];
     public function user()
     {

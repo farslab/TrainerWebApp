@@ -19,6 +19,7 @@ return new class extends Migration
             $table->date('birth_date');
             $table->string('gender');
             $table->string('phone_number');
+            $table->string('pp_path');
             $table->timestamps();
         });
     }

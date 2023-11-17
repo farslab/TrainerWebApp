@@ -19,6 +19,7 @@ return new class extends Migration
             $table->text('experiences');
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
+            $table->string('pp_path');
             $table->timestamps();
         });
     }

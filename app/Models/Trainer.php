@@ -16,6 +16,8 @@ class Trainer extends Model
         'experiences',
         'email',
         'phone',
+        'pp_path',
+
     ];
     public function user()
     {

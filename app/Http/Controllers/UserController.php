@@ -45,6 +45,8 @@ class UserController extends Controller
                 'specialty' => $request->input('specialty'),
                 'experiences' => $request->input('experiences'),
                 'phone' => $request->input('phone'),
+                'pp_path'=> '/public/images/filename..',
+
                 
             ]);
 
@@ -84,9 +86,17 @@ class UserController extends Controller
                 'birth_date' => $request->input('customer_birth_date'),
                 'gender' => $request->input('gender'),
                 'phone_number' => $request->input('phone_number'),
+                'pp_path'=> '/public/images/filename..',
             ]);
-
-            return redirect()->back()->with('success', 'Danışan Başarıyla Oluşturuldu.');
+            if ($customer) {
+                if ($request->is('register')) {
+                    return redirect()->route('login')->with('success', 'Hesap Başarıyla Oluşturuldu. Giriş Yapabilirsiniz.');
+                } elseif ($request->is('create-new-user')) {
+                    return redirect()->back()->with('success', 'Danışan Başarıyla Oluşturuldu.');
+                }
+            } else {
+                return redirect()->back()->with('error', 'Hesap oluşturulurken bir hata oluştu.');
+            }
         }
 
 
