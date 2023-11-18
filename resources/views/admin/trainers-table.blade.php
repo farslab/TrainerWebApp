@@ -17,7 +17,7 @@
             <tbody>
               @foreach($trainers as $trainer)
               <tr>
-                <th scope="row">Pic/path</th>
+                <td><img src="{{ Storage::url($trainer->pp_path) }}" alt="Profil Fotografı" class="img-circle object-fit-cover" width="70" height="70"></td>
                 <td>{{$trainer->user->name}}</td>
                 <td>{{$trainer->customers->count()}}</td>
                 <td>{{$trainer->specialty}}</td>

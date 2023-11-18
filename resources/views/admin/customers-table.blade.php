@@ -21,7 +21,7 @@
                 <tbody>
                     @foreach($customers as $customer)
                     <tr>
-                        <th scope="row">Pic/path</th>
+                        <td><img src="{{ Storage::url($customer->pp_path) }}" alt="Profil Fotografı" class="img-circle object-fit-cover" width="70" height="70"></td>
                         <td>{{$customer->user->name}}</td>
                         <td>{{$customer->trainer->name}}</td>
                         <td>{{$customer->customer_target}}</td>

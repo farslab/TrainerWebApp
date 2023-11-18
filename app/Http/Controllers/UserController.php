@@ -34,31 +34,34 @@ class UserController extends Controller
                 'name' => $request->input('name'),
                 'email' => $request->input('email'),
                 'password' => bcrypt($request->input('password')),
-                'role'=> $request->input('role'),
+                'role' => $request->input('role'),
             ]);
 
             // Trainer oluştur
             $trainer = Trainer::create([
-                'name'=> $user->name,
+                'name' => $user->name,
                 'user_id' => $user->id,
-                'email' =>$user->email,
+                'email' => $user->email,
                 'specialty' => $request->input('specialty'),
                 'experiences' => $request->input('experiences'),
                 'phone' => $request->input('phone'),
-                'pp_path'=> '/public/images/filename..',
 
-                
+
+
+
+
+
             ]);
 
             return redirect()->back()->with('success', 'Antrenör Başarıyla Oluşturuldu.');
         }
-       
+
         if ($request->input('role') == 'customer') {
 
             try {
                 $trainerId = $this->getTrainerId($request->input('customer_target'));
             } catch (\Throwable $th) {
-                return redirect()->back()->with('error','Antrenör Eksikliği Sebebiyle Tamamlanamadı.');
+                return redirect()->back()->with('error', 'Antrenör Eksikliği Sebebiyle Tamamlanamadı.');
             }
 
 
@@ -74,20 +77,32 @@ class UserController extends Controller
                 'name' => $request->input('name'),
                 'email' => $request->input('email'),
                 'password' => bcrypt($request->input('password')),
-                'role'=> $request->input('role'),
+                'role' => $request->input('role'),
 
             ]);
+
+            // pp verilmediyse default avatar
+            if ($request->hasFile('profile_photo')) {
+                $dosya = $request->file('profile_photo');
+                $dosyaAdi = uniqid() . '-fitlife-' . $user->email . '.' . $dosya->getClientOriginalExtension();
+                // Dosyayı storage/app/public/profile_photos dizinine kaydet
+                $pp_path = $dosya->storeAs('public/profile_photos', $dosyaAdi);
+            } else {
+                // Varsayılan avatar yolunu belirle
+                $pp_path = 'public/images/avatar.png';
+            }
 
             // Customer oluştur
             $customer = Customer::create([
                 'user_id' => $user->id,
-                'trainer_id'=>$trainerId,
-                'customer_target'=>$request->input('customer_target'),
+                'trainer_id' => $trainerId,
+                'customer_target' => $request->input('customer_target'),
                 'birth_date' => $request->input('customer_birth_date'),
                 'gender' => $request->input('gender'),
                 'phone_number' => $request->input('phone_number'),
-                'pp_path'=> '/public/images/filename..',
+                'pp_path' => $pp_path,
             ]);
+
             if ($customer) {
                 if ($request->is('register')) {
                     return redirect()->route('login')->with('success', 'Hesap Başarıyla Oluşturuldu. Giriş Yapabilirsiniz.');
@@ -118,7 +133,7 @@ class UserController extends Controller
     {
         $trainers = Trainer::orderBy("created_at", "desc")->get();
 
-        return view('admin.trainers-table',compact('trainers'));
+        return view('admin.trainers-table', compact('trainers'));
 
     }
     public function customers()

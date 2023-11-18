@@ -46,7 +46,7 @@
             <div class="card-body">
                 <p class="login-box-msg">Hemen Profilinizi Oluşturun</p>
 
-                <form action="{{ route('register') }}" method="POST">
+                <form action="{{ route('register') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" value="customer" name="role" />
                     <div class="row">
