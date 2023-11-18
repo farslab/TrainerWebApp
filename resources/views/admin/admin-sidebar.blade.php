@@ -3,7 +3,7 @@
     <!-- Brand Logo -->
     <a href="/" class="brand-link align-items-center justify-content-center d-flex flex-row">
       <img
-        src="dist/img/fitlifelogo-white.png"
+        src="{{asset('dist/img/fitlifelogo-white.png')}}"
         alt="fitlife"
         class="brand-image"
       />
@@ -15,7 +15,7 @@
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
           <img
-            src="dist/img/avatar.png"
+            src="{{asset('dist/img/avatar.png')}}"
             class="img-circle elevation-2"
             alt="User Image"
           />

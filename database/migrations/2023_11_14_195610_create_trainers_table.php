@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('trainers', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('name')->default('trainerName');
             $table->enum('specialty', ['kilo_aldirma', 'kilo_verdirme', 'kilo_koruma', 'kas_kazanma']);
             $table->text('experiences');

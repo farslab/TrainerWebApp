@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('customers', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
-            $table->foreignId('trainer_id')->constrained()->default('1'); 
+            $table->foreignId('trainer_id')->constrained()->cascadeOnDelete();
             $table->enum('customer_target', ['kilo_aldirma', 'kilo_verdirme', 'kilo_koruma', 'kas_kazanma']);
             $table->date('birth_date');
             $table->string('gender');

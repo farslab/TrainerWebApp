@@ -45,11 +45,10 @@ Route::get('/customer-dashboard', function () {
 Route::get('/trainer-dashboard', function () {
     return view('trainer.trainer-dashboard');
 })->middleware(['auth', 'role:trainer'])->name('trainer-dash');
-
+    
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/profile/{user}', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
 });
 
 //admin routes
@@ -58,6 +57,12 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::post('/create-new-user', [UserController::class, 'store'])->name('create-store');
     Route::get('/trainers', [UserController::class, 'trainers'])->name('trainers-list');
     Route::get('/customers', [UserController::class, 'customers'])->name('customers-list');
+
+    //diger user islemleri
+    Route::get('user-disable/{user}', [UserController::class, 'disableUser'])->name('user.disable');
+    Route::get('user-enable/{user}', [UserController::class, 'enableUser'])->name('user.enable');
+    Route::get('user-delete/{user}', [UserController::class, 'deleteUser'])->name('user.delete');
+
 
 
 

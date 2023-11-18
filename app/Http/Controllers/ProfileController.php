@@ -8,39 +8,72 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use App\Models\User;
 
 class ProfileController extends Controller
 {
     /**
      * Display the user's profile form.
      */
-    public function edit(Request $request): View
+    public function edit(User $user)
     {
+        $loggedInUser = auth()->user();
+        if ($loggedInUser->role != "admin" && $loggedInUser->id != $user->id) {
+            return redirect(route("profile.edit", $loggedInUser->id));
+        }
+        $userRole = $user->role;
         return view('profile.edit', [
-            'user' => $request->user(),
+            'user' => $user, 'userRole' => $userRole
         ]);
     }
 
     /**
      * Update the user's profile information.
      */
-    public function update(ProfileUpdateRequest $request): RedirectResponse
+    public function update(Request $request)
     {
-        $request->user()->fill($request->validated());
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
+        $user = User::find($request->user_id);
+
+        if ($user->role == 'trainer') {
+            if ($request->hasFile('profile_photo')) {
+                $file = $request->file('profile_photo');
+                $fileName = uniqid() . '-fitlife-' . $user->email . '.' . $file->getClientOriginalExtension();
+                $pp_path = $file->storeAs('public/profile_photos', $fileName);
+                $user->trainer->pp_path = $pp_path;
+                $user->trainer->save();
+            }
+
+            $user->name = $request->name;
+            $user->trainer->phone = $request->phone;
+            $user->trainer->experiences = $request->experiences;
+            $user->trainer->save();
+            $user->save();
+        }
+        if ($user->role == 'customer') {
+            if ($request->hasFile('profile_photo')) {
+                $file = $request->file('profile_photo');
+                $fileName = uniqid() . '-fitlife-' . $user->email . '.' . $file->getClientOriginalExtension();
+                $pp_path = $file->storeAs('public/profile_photos', $fileName);
+                $user->customer->pp_path = $pp_path;
+                $user->customer->save();
+            }
+
+            $user->name = $request->name;
+            $user->customer->phone_number = $request->phone;
+            $user->customer->save();
+            $user->save();
         }
 
-        $request->user()->save();
 
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+
+        return redirect()->back()->with('success', 'Profil Bilgileri Güncellendi.');
     }
 
     /**
      * Delete the user's account.
      */
-    public function destroy(Request $request): RedirectResponse
+    public function destroy(Request $request) : RedirectResponse
     {
         $request->validateWithBag('userDeletion', [
             'password' => ['required', 'current_password'],

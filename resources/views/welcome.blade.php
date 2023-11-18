@@ -64,7 +64,7 @@
 
                 <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" >
                     <div class="icon-box">
-                        <div class="icon"><i class="ri-palette-line"></i></div>
+                        <div class="icon"><i class="ri-donut-chart-line"></i></div>
                         <h4 class="title"><a href="">Beslenme Rehberi</a></h4>
                         <p class="description">En doğru beslenme programları hedefinize en hızlı yoldan ulaşmanıza yardımcı olacak.</p>
                     </div>
@@ -72,7 +72,7 @@
 
                 <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" >
                     <div class="icon-box">
-                        <div class="icon"><i class="ri-command-line"></i></div>
+                        <div class="icon"><i class="ri-video-chat-line"></i></div>
                         <h4 class="title"><a href="">Video İçerik</a></h4>
                         <p class="description">Eğitmenlerimiz tarafından eklenen antrenman programları için video açıklamalar.
                         </p>
@@ -81,7 +81,7 @@
 
                 <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" >
                     <div class="icon-box">
-                        <div class="icon"><i class="ri-fingerprint-line"></i></div>
+                        <div class="icon"><i class="ri-contacts-book-2-line"></i></div>
                         <h4 class="title"><a href="">Birebir İletişim</a></h4>
                         <p class="description">Antrenörünüzle doğrudan kesintisiz iletişim kurabileceğiniz mesajlaşma arayüzü.
                         </p>

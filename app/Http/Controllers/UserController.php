@@ -12,6 +12,20 @@ use Exception;
 
 class UserController extends Controller
 {
+    public function disableUser(User $user){
+        $user->update(['is_active' => 0]);
+        return redirect()->back()->with('success', 'Kullanıcı devre dışı bırakıldı.');
+
+    }
+    public function deleteUser(User $user){
+        $user->delete();
+        return redirect()->back()->with('success', 'Kullanıcı Başarıyla Silindi.');
+
+    }
+    public function enableUser(User $user){
+        $user->update(['is_active' => 1]);
+        return redirect()->back()->with('success', 'Kullanıcı Aktif Hale Getirildi.');
+    }
     public function index()
     {
         return view("admin.create-new-user");
@@ -45,11 +59,7 @@ class UserController extends Controller
                 'specialty' => $request->input('specialty'),
                 'experiences' => $request->input('experiences'),
                 'phone' => $request->input('phone'),
-
-
-
-
-
+                'pp_path'=> 'public/profile_photos/avatar.png',
 
             ]);
 
@@ -61,7 +71,7 @@ class UserController extends Controller
             try {
                 $trainerId = $this->getTrainerId($request->input('customer_target'));
             } catch (\Throwable $th) {
-                return redirect()->back()->with('error', 'Antrenör Eksikliği Sebebiyle Tamamlanamadı.');
+                return redirect()->back()->with('error', 'Hesap Oluşturulamadı: Yetersiz Antrenör.');
             }
 
 
@@ -85,11 +95,10 @@ class UserController extends Controller
             if ($request->hasFile('profile_photo')) {
                 $dosya = $request->file('profile_photo');
                 $dosyaAdi = uniqid() . '-fitlife-' . $user->email . '.' . $dosya->getClientOriginalExtension();
-                // Dosyayı storage/app/public/profile_photos dizinine kaydet
                 $pp_path = $dosya->storeAs('public/profile_photos', $dosyaAdi);
             } else {
                 // Varsayılan avatar yolunu belirle
-                $pp_path = 'public/images/avatar.png';
+                $pp_path = 'public/profile_photos/avatar.png';
             }
 
             // Customer oluştur
@@ -110,7 +119,9 @@ class UserController extends Controller
                     return redirect()->back()->with('success', 'Danışan Başarıyla Oluşturuldu.');
                 }
             } else {
+                $user->delete();
                 return redirect()->back()->with('error', 'Hesap oluşturulurken bir hata oluştu.');
+
             }
         }
 
