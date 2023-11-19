@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TrainNutritionController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -45,10 +46,14 @@ Route::get('/customer-dashboard', function () {
 Route::get('/trainer-dashboard', function () {
     return view('trainer.trainer-dashboard');
 })->middleware(['auth', 'role:trainer'])->name('trainer-dash');
-    
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile/{user}', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
+
+    //beslenme planları
+    Route::get('/nutrition-plan/{user}', [TrainNutritionController::class, 'index'])->name('nutrition.index');
+    Route::post('/nutrition-plan', [TrainNutritionController::class, 'store'])->name('nutrition.store');
 });
 
 //admin routes

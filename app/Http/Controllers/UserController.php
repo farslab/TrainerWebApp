@@ -6,23 +6,27 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Customer;
 use App\Models\Trainer;
+use App\Models\NutritionPlan;
 use Illuminate\Validation\Rules;
 use Exception;
 
 
 class UserController extends Controller
 {
-    public function disableUser(User $user){
+    public function disableUser(User $user)
+    {
         $user->update(['is_active' => 0]);
         return redirect()->back()->with('success', 'Kullanıcı devre dışı bırakıldı.');
 
     }
-    public function deleteUser(User $user){
+    public function deleteUser(User $user)
+    {
         $user->delete();
         return redirect()->back()->with('success', 'Kullanıcı Başarıyla Silindi.');
 
     }
-    public function enableUser(User $user){
+    public function enableUser(User $user)
+    {
         $user->update(['is_active' => 1]);
         return redirect()->back()->with('success', 'Kullanıcı Aktif Hale Getirildi.');
     }
@@ -59,7 +63,7 @@ class UserController extends Controller
                 'specialty' => $request->input('specialty'),
                 'experiences' => $request->input('experiences'),
                 'phone' => $request->input('phone'),
-                'pp_path'=> 'public/profile_photos/avatar.png',
+                'pp_path' => 'public/profile_photos/avatar.png',
 
             ]);
 
@@ -111,6 +115,16 @@ class UserController extends Controller
                 'phone_number' => $request->input('phone_number'),
                 'pp_path' => $pp_path,
             ]);
+
+            $days = ['Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma', 'Cumartesi', 'Pazar'];
+
+            foreach ($days as $day) {
+                NutritionPlan::create([
+                    'customer_id' => $customer->id,
+                    'day' => $day,
+                    // Diğer beslenme planı özelliklerini ekleyin
+                ]);
+            }
 
             if ($customer) {
                 if ($request->is('register')) {
