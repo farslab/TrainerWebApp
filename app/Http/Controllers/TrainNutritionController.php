@@ -9,6 +9,9 @@ use Illuminate\Http\Request;
 
 class TrainNutritionController extends Controller
 {
+    public function trainingIndex(){
+
+    }
     public function index(User $user)
     {
         $days = ['Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma', 'Cumartesi', 'Pazar'];
