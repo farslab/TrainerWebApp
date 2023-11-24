@@ -50,7 +50,6 @@ class TrainNutritionController extends Controller
                     'meal_1' => $data['meals_1'][$key],
                     'meal_2' => $data['meals_2'][$key],
                     'meal_3' => $data['meals_3'][$key],
-                    // Diğer öğünler için benzer şekilde devam edebilirsiniz
                 ]
             );
         }
