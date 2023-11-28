@@ -6,17 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>FitLife | Kayıt Ol</title>
 
-    <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,300&display=swap"
         rel="stylesheet">
-    <!-- Icons -->
     <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css" />
-
     <link rel="stylesheet" href="plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css" />
-    <!-- Css -->
     <link rel="stylesheet" href="dist/css/bootstrap.min.css" />
 
 </head>
@@ -71,8 +67,6 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Diğer giriş alanları da aynı şekilde iki kolon halinde yerleştirilebilir -->
-                    <!-- ... -->
                     <div class="row">
                         <div class="col-md-6">
                             <div class="input-group mb-3">
@@ -101,8 +95,8 @@
                         <div class="col-md-6">
                             <div class="input-group mb-3">
                                 <select class="form-control" name="gender" placeholder="Cinsiyet">
-                                    <option value="erkek">Erkek</option>
-                                    <option value="kadin">Kadın</option>
+                                    <option value="Erkek">Erkek</option>
+                                    <option value="Kadın">Kadın</option>
                                 </select>
                                 <div class="input-group-append">
                                     <div class="input-group-text">
@@ -171,17 +165,12 @@
 
                 <a href="/login" class="text-center">Zaten profiliniz var mı? Giriş Yapın</a>
             </div>
-            <!-- /.form-box -->
-        </div><!-- /.card -->
+        </div>
     </div>
-    <!-- /.register-box -->
 
-    <!-- jQuery -->
-    <script src="../../plugins/jquery/jquery.min.js"></script>
-    <!-- Bootstrap 4 -->
-    <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- AdminLTE App -->
-    <script src="../../dist/js/adminlte.min.js"></script>
+    <script src="{{asset('plugins/jquery/jquery.min.js')}}"></script>
+    <script src="{{asset('plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{asset('dist/js/adminlte.min.js')}}"></script>
 </body>
 
 </html>

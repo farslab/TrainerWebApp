@@ -60,7 +60,7 @@ class ProfileController extends Controller
                 $user->customer->pp_path = $pp_path;
                 $user->customer->save();
             }
-
+            $user->customer->birth_date=$request->birth_date;
             $user->name = $request->name;
             $user->customer->phone_number = $request->phone;
             $user->customer->save();

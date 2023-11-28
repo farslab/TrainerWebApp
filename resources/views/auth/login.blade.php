@@ -6,17 +6,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>FitLife | Giriş Yap</title>
 
-  <!-- Google Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
     href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,300&display=swap"
     rel="stylesheet">
-  <!-- Icons -->
   <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css" />
-
   <link rel="stylesheet" href="plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css" />
-  <!-- Css -->
   <link rel="stylesheet" href="dist/css/bootstrap.min.css" />
 
 </head>
@@ -81,27 +77,21 @@
                 </label>
               </div>
             </div>
-            <!-- /.col -->
             <div class="col-4">
               <button type="submit" class="btn btn-primary btn-block">Giriş Yap</button>
             </div>
-            <!-- /.col -->
           </div>
         </form>
 
         <a href="/register" class="text-center pt-2">Yeni Hesap Oluştur</a>
       </div>
-      <!-- /.form-box -->
-    </div><!-- /.card -->
+    </div>
   </div>
-  <!-- /.register-box -->
 
-  <!-- jQuery -->
-  <script src="../../plugins/jquery/jquery.min.js"></script>
-  <!-- Bootstrap 4 -->
-  <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <!-- AdminLTE App -->
-  <script src="../../dist/js/adminlte.min.js"></script>
+  
+  <script src="{{asset('plugins/jquery/jquery.min.js')}}"></script>
+  <script src="{{asset('plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+  <script src="{{asset('dist/js/adminlte.min.js')}}"></script>
 </body>
 
 </html>

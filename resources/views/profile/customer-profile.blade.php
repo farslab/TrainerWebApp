@@ -60,16 +60,23 @@
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label for="inputName2" class="col-sm-2 col-form-label">Deneyimler</label>
+                    <label for="inputName2" class="col-sm-2 col-form-label">Doğum Tarihi</label>
                     <div class="col-sm-10">
-                      <input type="text" name="experiences" value="{{$user->customer->experiences}}" class="form-control"
-                        id="experiences" placeholder="Deneyim" />
+                      <input type="date" name="birth_date" value="{{$user->customer->birth_date}}" class="form-control"
+                        id="experiences" placeholder="Dogum Günü" />
                     </div>
                   </div>
                   <div class="form-group row">
                     <label for="inputExperience" class="col-sm-2 col-form-label">Hedef</label>
                     <div class="col-sm-10">
                       <input type="text" disabled name="experiences" value="{{$user->customer->customer_target}}"
+                        class="form-control" id="experiences" placeholder="Deneyim" />
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inputExperience" class="col-sm-2 col-form-label">Cinsiyet</label>
+                    <div class="col-sm-10">
+                      <input type="text" disabled name="experiences" value="{{$user->customer->gender}}"
                         class="form-control" id="experiences" placeholder="Deneyim" />
                     </div>
                   </div>

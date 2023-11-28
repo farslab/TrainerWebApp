@@ -2,7 +2,6 @@
 @section('title','Yeni Kullanıcı Oluştur')
 @section('content')
    
-    
     <div class="container">
         <ul class="nav nav-tabs" id="myTabs">
             <li class="nav-item">
@@ -37,8 +36,8 @@
                     <div class="form-group">
                         <label for="gender">Cinsiyet:</label>
                         <select name="gender" class="form-control" required>
-                            <option value="male">Erkek</option>
-                            <option value="female">Kadın</option>
+                            <option value="Erkek">Erkek</option>
+                            <option value="Kadın">Kadın</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -66,8 +65,6 @@
                         <label for="customer_password_confirmation" class="form-label">Parola Tekrar:</label>
                         <input type="password" name="password_confirmation" class="form-control" required>
                     </div>
-
-                    <!-- Diğer gerekli alanları ekleyebilirsiniz -->
 
                     <button type="submit" class="btn btn-primary">Danışan Oluştur</button>
                 </form>
@@ -124,7 +121,6 @@
             </div>
         </div>
     </div>
-    <!-- /.content -->
 
 
 @endsection

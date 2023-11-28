@@ -2,7 +2,6 @@
 @section('title','Danışan Listesi')
 @section('content')
 
-<!-- Main content -->
 <section class="content">
   <div class="container-fluid">
     <div class="row">
@@ -51,7 +50,6 @@
                 </div>
               </div>
             </td>
-
           </tr>
           @endforeach
         </tbody>
@@ -59,6 +57,5 @@
     </div>
   </div>
 </section>
-<!-- /.content -->
 
 @endsection
