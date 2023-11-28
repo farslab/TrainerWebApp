@@ -13,7 +13,6 @@
                 <th> Öğün 1</th>
                 <th> Öğün 2</th>
                 <th> Öğün 3</th>
-                <!-- ... Diğer öğünler ... -->
             </tr>
         </thead>
         <tbody>

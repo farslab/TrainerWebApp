@@ -29,9 +29,9 @@ class Customer extends Model
         return $this->belongsTo(Trainer::class);
     }
 
-    public function trainingProgram()
+    public function trainingPrograms()
     {
-        return $this->hasOne(TrainingProgram::class);
+        return $this->hasMany(TrainingProgram::class)->orderBy('created_at','desc');
     }
 
     public function nutritionPlan()

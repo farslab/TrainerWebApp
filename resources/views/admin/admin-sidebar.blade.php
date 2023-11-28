@@ -33,11 +33,10 @@
           data-accordion="false"
         >
           <li class="nav-item">
-            <a href="/dashboard" class="nav-link {{ Request::is('admin-dashboard') ? 'active' : '' }}">
+            <a href="{{route('dashboard')}}" class="nav-link {{ Request::is('dashboard') ? 'active' : '' }}">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Genel Bakış
-                <i class="right fas fa-angle-left"></i>
               </p>
             </a>
           </li>

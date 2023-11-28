@@ -18,12 +18,14 @@ class ProfileController extends Controller
     public function edit(User $user)
     {
         $loggedInUser = auth()->user();
-        if ($loggedInUser->role != "admin" && $loggedInUser->id != $user->id) {
+        
+
+        if ($loggedInUser->role != "admin" && $loggedInUser->id != $user->id && $loggedInUser->id != $user->customer->trainer->user_id) {
             return redirect(route("profile.edit", $loggedInUser->id));
         }
         $userRole = $user->role;
         return view('profile.edit', [
-            'user' => $user, 'userRole' => $userRole
+            'user' => $user, 'userRole' => $userRole,
         ]);
     }
 

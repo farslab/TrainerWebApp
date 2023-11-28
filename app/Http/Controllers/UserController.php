@@ -9,10 +9,28 @@ use App\Models\Trainer;
 use App\Models\NutritionPlan;
 use Illuminate\Validation\Rules;
 use Exception;
+use Auth;
 
 
 class UserController extends Controller
 {
+    public function dashboard(){
+        $user=Auth::user();
+
+        if($user->hasRole('admin')){
+
+            return view('admin.admin-dashboard');
+        }
+        elseif($user->hasRole('trainer')){
+            $customers=$user->trainer->customers;
+            $user=Auth::user();
+
+            return view('trainer.trainer-dashboard', compact('customers', 'user'));
+        }
+        else{
+            return view('customer.customer-dashboard');
+        }
+    }
     public function disableUser(User $user)
     {
         $user->update(['is_active' => 0]);

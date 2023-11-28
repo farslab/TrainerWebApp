@@ -24,7 +24,7 @@
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
 
-        @if(auth()->check()) {{-- Kullanıcı giriş yapmışsa --}}
+        @if(auth()->check())
         @if(auth()->user()->role === 'admin')
         @include('admin.admin-sidebar')
         @elseif(auth()->user()->role === 'trainer')
@@ -36,7 +36,6 @@
 
 
 
-        <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             @if(session('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -79,18 +78,14 @@
                             </ol>
                         </div>
           
-                        <!-- /.col -->
                     </div>
-                    <!-- /.row -->
                 </div>
-                <!-- /.container-fluid -->
             </div>
 
 
             @yield('content')
         </div>
 
-        <!-- /.content-wrapper -->
         <footer class="main-footer">
             <strong> &copy; 2023 FitLife.</strong>
         </footer>

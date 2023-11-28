@@ -19,33 +19,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::middleware(['auth', ])->group(function () {
+    Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
+});
 
-Route::get('/dashboard', function () {
-    $user = auth()->user();
 
-    if ($user->hasRole('admin')) {
-        return redirect()->route('admin-dash');
-    } elseif ($user->hasRole('customer')) {
-        return redirect()->route('customer-dash');
-    } elseif ($user->hasRole('trainer')) {
-        return redirect()->route('trainer-dash');
-    } else {
-        // Handle other roles or a default dashboard view
-        return redirect('/customer-dashboard');
-    }
-})->middleware(['auth'])->name('dashboard');
-
-Route::get('/admin-dashboard', function () {
-    return view('admin.admin-dashboard');
-})->middleware(['auth', 'role:admin'])->name('admin-dash');
-
-Route::get('/customer-dashboard', function () {
-    return view('customer.customer-dashboard');
-})->middleware(['auth', 'role:customer'])->name('customer-dash');
-
-Route::get('/trainer-dashboard', function () {
-    return view('trainer.trainer-dashboard');
-})->middleware(['auth', 'role:trainer'])->name('trainer-dash');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile/{user}', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -68,10 +46,13 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('user-enable/{user}', [UserController::class, 'enableUser'])->name('user.enable');
     Route::get('user-delete/{user}', [UserController::class, 'deleteUser'])->name('user.delete');
 
-
-
-
-
+});
+//trainer routes
+Route::middleware(['auth', 'role:trainer,admin'])->group(function () {
+    Route::get('/t_customers', [TrainNutritionController::class, 'tCustomers'])->name('t_customers');
+    Route::get('/t_training-program/{user}', [TrainNutritionController::class, 'trainingIndex'])->name('training.index');
+    Route::post('/trainingStore',[TrainNutritionController::class, 'trainingStore'])->name('training.store');
+    Route::get('/trainingDelete/{trainingProgram}',[TrainNutritionController::class, 'trainingDelete'])->name('trainingDelete');
 });
 
 require __DIR__ . '/auth.php';

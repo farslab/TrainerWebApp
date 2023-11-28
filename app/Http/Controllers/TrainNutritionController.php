@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\TrainingProgram;
 use Auth;
 use App\Models\NutritionPlan;
 use App\Models\User;
@@ -9,11 +10,49 @@ use Illuminate\Http\Request;
 
 class TrainNutritionController extends Controller
 {
-    public function trainingIndex(){
+    public function trainingDelete(TrainingProgram $trainingProgram){
 
+        $trainingProgram->delete();
+        return redirect()->back()->with('success','Antrenman Programı Silindi.');
+
+    }
+
+    public function tCustomers(User $user){
+        $user= Auth::user();
+        $customers=$user->trainer->customers;
+
+        return view('trainer.tCustomers', compact('customers'));
+
+    }
+    public function trainingStore(Request $request){
+        $user=User::find($request->input('user_id'));
+
+        $customer=$user->customer;
+        
+        TrainingProgram::create([
+            'customer_id'=>$customer->id,
+            'exercise_name'=> $request->exercise_name,
+            'target'=> $request->target,
+            'sets'=>$request->sets,
+            'reps'=>$request->reps,
+            'video_guide'=>$request->video_guide,
+            'start_date'=>$request->start_date,
+            'duration'=>$request->duration,
+
+        ]);
+        return redirect()->back()->with('Success','Antrenman Programı Oluşturuldu.');
+
+    }
+    public function trainingIndex(User $user){
+
+        return view('trainer.training-program', compact('user'));
     }
     public function index(User $user)
     {
+        if($user->id!=auth()->user()->id && $user->customer->trainer->user_id != auth()->user()->id && !auth()->user()->hasRole('admin')){
+            abort(403,'BU SAYFA GORUNTULENEMIYOR');
+        }
+
         $days = ['Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma', 'Cumartesi', 'Pazar'];
 
         $customer = $user->customer;
