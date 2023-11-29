@@ -14,20 +14,33 @@ use Auth;
 
 class UserController extends Controller
 {
-    public function dashboard(){
-        $user=Auth::user();
+    public function dashboard()
+    {
+        $user = Auth::user();
 
-        if($user->hasRole('admin')){
+        if ($user->hasRole('admin')) {
 
             return view('admin.admin-dashboard');
-        }
-        elseif($user->hasRole('trainer')){
-            $customers=$user->trainer->customers;
-            $user=Auth::user();
+        } elseif ($user->hasRole('trainer')) {
+            $customers = $user->trainer->customers;
 
-            return view('trainer.trainer-dashboard', compact('customers', 'user'));
-        }
-        else{
+            $nutritionPlanCount=0;
+            $trainingProgramCount=0;
+            
+            foreach($customers as $customer){
+                if($customer->nutritionPlan){
+                    $nutritionPlanCount++;
+                }
+                if($customer->trainingPrograms){
+                    foreach($customer->trainingPrograms as $trainingProgram){
+                        $trainingProgramCount++;
+
+                    }
+                }
+            }
+
+            return view('trainer.trainer-dashboard', compact('customers', 'user','nutritionPlanCount','trainingProgramCount'));
+        } else {
             return view('customer.customer-dashboard');
         }
     }

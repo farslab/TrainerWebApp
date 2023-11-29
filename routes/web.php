@@ -48,11 +48,15 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
 });
 //trainer routes
-Route::middleware(['auth', 'role:trainer,admin'])->group(function () {
+Route::middleware(['auth'])->group(function () {
     Route::get('/t_customers', [TrainNutritionController::class, 'tCustomers'])->name('t_customers');
     Route::get('/t_training-program/{user}', [TrainNutritionController::class, 'trainingIndex'])->name('training.index');
     Route::post('/trainingStore',[TrainNutritionController::class, 'trainingStore'])->name('training.store');
     Route::get('/trainingDelete/{trainingProgram}',[TrainNutritionController::class, 'trainingDelete'])->name('trainingDelete');
 });
+Route::middleware(['auth'])->group(function (){
+    Route::get('/create-new-pr', [TrainNutritionController::class, 'progressRecordsIndex'])->name('pr.index');
+    Route::post('/create-new-pr', [TrainNutritionController::class, 'progressRecordsAdd'])->name('pr.add');
 
+});
 require __DIR__ . '/auth.php';

@@ -2,14 +2,44 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ProgressRecord;
 use App\Models\TrainingProgram;
 use Auth;
 use App\Models\NutritionPlan;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Models\Customer;
 
 class TrainNutritionController extends Controller
 {
+    public function progressRecordsIndex(){
+
+        return view('customer.create-new-progress');
+
+    }
+    public function progressRecordsAdd(Request $request){
+
+        $customer=Customer::find($request->customer_id);
+
+        ProgressRecord::create([
+            'customer_id'=>$customer->id,
+            'weight'=>$request->weight,
+            'height'=>$request->height,
+            'body_fat_percentage'=>$request->body_fat_percentage,
+            'muscle_mass'=>$request->muscle_mass,
+            'body_mass_index'=>$request->body_mass_index,
+
+        ]);
+        return redirect()->back()->with('success', 'Yeni Gelişim Verisi Başarıyla Eklendi.');
+
+
+
+    }
+    public function progressRecordsDestroy(){
+
+    }
+    
+
     public function trainingDelete(TrainingProgram $trainingProgram){
 
         $trainingProgram->delete();
@@ -45,6 +75,12 @@ class TrainNutritionController extends Controller
     }
     public function trainingIndex(User $user){
 
+        $loggedInUser=auth()->user();
+        if($loggedInUser->hasRole('customer')){
+            $user=auth()->user();
+            return view('customer.training-program-c', compact('user'));
+        }
+
         return view('trainer.training-program', compact('user'));
     }
     public function index(User $user)
@@ -52,11 +88,19 @@ class TrainNutritionController extends Controller
         if($user->id!=auth()->user()->id && $user->customer->trainer->user_id != auth()->user()->id && !auth()->user()->hasRole('admin')){
             abort(403,'BU SAYFA GORUNTULENEMIYOR');
         }
+        
 
         $days = ['Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma', 'Cumartesi', 'Pazar'];
 
         $customer = $user->customer;
         $nutritionPlan=$customer->nutritionPlan;
+
+        $loggedInUser=auth()->user();
+        if($loggedInUser->hasRole('customer')){
+            $user=$loggedInUser;
+
+            return view('customer.nutrition-plan-c',compact('days','nutritionPlan','user'));
+        }
         return view('trainer.nutrition-plan', compact('days', 'nutritionPlan', 'user'));
     }
     public function store(Request $request)

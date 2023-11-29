@@ -33,6 +33,10 @@ class Customer extends Model
     {
         return $this->hasMany(TrainingProgram::class)->orderBy('created_at','desc');
     }
+    public function progressRecords()
+    {
+        return $this->hasMany(ProgressRecord::class)->orderBy('created_at','desc');
+    }
 
     public function nutritionPlan()
     {
