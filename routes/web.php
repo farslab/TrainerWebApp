@@ -19,11 +19,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::middleware(['auth', ])->group(function () {
-    Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard')->middleware('auth');
 });
-
-
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile/{user}', [ProfileController::class, 'edit'])->name('profile.edit');

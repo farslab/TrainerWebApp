@@ -12,7 +12,7 @@ return new class extends Migration {
     {
         Schema::create('training_programs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('customer_id')->constrained(); 
+            $table->foreignId('customer_id')->constrained()->onDelete('cascade'); 
             $table->string('exercise_name');
             $table->text('target');
             $table->string('sets');
