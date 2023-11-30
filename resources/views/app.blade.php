@@ -67,8 +67,10 @@
                                         {{auth()->user()->name}}
                                     </button>
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                                        @if (auth()->user()->role != 'admin')
                                         <a class="dropdown-item" href="{{route('profile.edit',Auth::user()->id)}}"><i
                                                 class="fas fa-user pr-2"></i>Profil Ayarları</a>
+                                        @endif
                                         <a class="dropdown-item" href="/logout"><i
                                                 class="fas fa-sign-out-alt pr-2"></i>Çıkış Yap</a>
                                     </div>

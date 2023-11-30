@@ -56,5 +56,8 @@ Route::middleware(['auth'])->group(function (){
     Route::get('/create-new-pr', [TrainNutritionController::class, 'progressRecordsIndex'])->name('pr.index');
     Route::post('/create-new-pr', [TrainNutritionController::class, 'progressRecordsAdd'])->name('pr.add');
 
+    //graphics
+    Route::get('graphics-progress/{user}',[TrainNutritionController::class, 'graphicsProgress'])->name('graphics.index');
+
 });
 require __DIR__ . '/auth.php';

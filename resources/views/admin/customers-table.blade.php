@@ -39,12 +39,12 @@
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
                   <a class="dropdown-item" href="{{route('profile.edit',$customer->user_id)}}">Profili Görüntüle</a>
                   <a class="dropdown-item" href="{{route('nutrition.index',$customer->user_id)}}">Beslenme Planı</a>
-
+                  <a class="dropdown-item" href="{{route('training.index',$customer->user_id)}}">Antrenman Programı</a>
+                  <a class="dropdown-item" href="{{route('graphics.index',$customer->user_id)}}">Gelişim Grafiği</a>
                   @if($customer->user->is_active==1)
                   <a class="dropdown-item" href="{{route('user.disable', $customer->user_id)}}">Devre Dışı Bırak</a>
                   @else
                   <a class="dropdown-item" href="{{route('user.enable', $customer->user_id)}}">Aktif Hale Getir</a>
-
                   @endif
                   <a class="dropdown-item" href="{{route('user.delete', $customer->user_id)}}">Hesabı Sil</a>
                 </div>

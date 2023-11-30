@@ -41,11 +41,10 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="#" class="nav-link">
+          <a href="{{route('graphics.index', auth()->user()->id)}}" class="{{Request::is('graphics-progress/'.auth()->user()->id)? 'active' : ''}} nav-link">
             <i class="nav-icon fas fa-chart-pie"></i>
             <p>
               Gelişim İstatistikleri
-              <span class="badge badge-info right">+</span>
 
             </p>
           </a>
