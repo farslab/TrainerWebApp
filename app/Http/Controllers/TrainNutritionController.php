@@ -16,24 +16,36 @@ class TrainNutritionController extends Controller
     public function graphicsProgress(User $user)
     {
 
-        setlocale(LC_TIME, 'tr_TR.utf8', 'tr_TR', 'tr');
+        if ($user->id != auth()->user()->id && auth()->user()->id != $user->customer->trainer->user_id && ! auth()->user()->hasRole('admin')) {
 
-        $dates = $user->customer->progressRecords->pluck('created_at')->map(function ($date) {
-            return Carbon::parse($date)->format('d-m-y');
-        });
-        $weights = $user->customer->progressRecords->pluck('weight');
-        $heights = $user->customer->progressRecords->pluck('height');
-        $bodyFatPercentages = $user->customer->progressRecords->pluck('body_fat_percentage');
-        $muscleMasses = $user->customer->progressRecords->pluck('muscle_mass');
-        $bodyMassIndexes = $user->customer->progressRecords->pluck('body_mass_index');
+            $user = auth()->user();
+            return redirect()->route('graphics.index', $user->id);
+        } else {
+            setlocale(LC_TIME, 'tr_TR.utf8', 'tr_TR', 'tr');
 
-        return view('customer.graphics-progress', compact('user', 'weights', 'heights', 'bodyFatPercentages', 'muscleMasses', 'bodyMassIndexes', 'dates'));
+            $dates = $user->customer->progressRecords->pluck('created_at')->map(function ($date) {
+                return Carbon::parse($date)->format('d-m-y');
+            });
+            $weights = $user->customer->progressRecords->pluck('weight');
+            $heights = $user->customer->progressRecords->pluck('height');
+            $bodyFatPercentages = $user->customer->progressRecords->pluck('body_fat_percentage');
+            $muscleMasses = $user->customer->progressRecords->pluck('muscle_mass');
+            $bodyMassIndexes = $user->customer->progressRecords->pluck('body_mass_index');
+
+            return view('customer.graphics-progress', compact('user', 'weights', 'heights', 'bodyFatPercentages', 'muscleMasses', 'bodyMassIndexes', 'dates'));
+
+        }
+
     }
     public function progressRecordsIndex()
     {
+        if(auth()->user()->hasRole('customer')){
 
+            return view('customer.create-new-progress');
 
-        return view('customer.create-new-progress');
+        }else{
+            abort(403,'BU SAYFA GÖRÜNTÜLENEMİYOR');
+        }
 
     }
 

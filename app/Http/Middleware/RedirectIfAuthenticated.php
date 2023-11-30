@@ -20,17 +20,17 @@ class RedirectIfAuthenticated
         if (auth()->guard($guard)->check()) {
             // Eğer kullanıcı admin ise, admin dashboard'a yönlendir
             if (auth()->user()->hasRole('admin')) {
-                return redirect('/admin-dashboard');
+                return redirect('/dashboard');
             }
 
             // Eğer kullanıcı trainer ise, trainer dashboard'a yönlendir
             if (auth()->user()->hasRole('trainer')) {
-                return redirect('/trainer-dashboard');
+                return redirect('/dashboard');
             }
 
             // Eğer kullanıcı customer ise, customer dashboard'a yönlendir
             if (auth()->user()->hasRole('customer')) {
-                return redirect('/customer-dashboard');
+                return redirect('/dashboard');
             }
         }
 

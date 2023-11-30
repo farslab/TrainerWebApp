@@ -11,7 +11,7 @@ class CheckUserRole
     public function handle($request, Closure $next, ...$roles)
     {
         if (!$request->user() || !$request->user()->hasAnyRole($roles)) {
-            abort(403, 'Unauthorized action.');
+            abort(403, 'Yetkisiz Erişim.');
         }
 
         return $next($request);

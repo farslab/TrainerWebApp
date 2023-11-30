@@ -44,6 +44,8 @@
                                         href="{{route('nutrition.index',$customer->user_id)}}">Beslenme Planı</a>
                                     <a class="dropdown-item"
                                         href="{{route('training.index',$customer->user_id)}}">Antrenman Programı</a>
+                                    <a class="dropdown-item"
+                                        href="{{route('graphics.index',$customer->user_id)}}">Gelişim Grafiği</a>
 
                                 </div>
                             </div>
