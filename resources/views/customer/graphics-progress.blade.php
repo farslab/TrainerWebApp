@@ -8,7 +8,6 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-6">
-                <!-- LINE CHART -->
                 <div class="card card-info">
                     <div class="card-header">
                         <h3 class="card-title">Kilo(kg)</h3>
@@ -23,9 +22,7 @@
                                          max-width: 100%;"></canvas>
                         </div>
                     </div>
-                    <!-- /.card-body -->
                 </div>
-                <!-- /.card -->
                 <div class="card card-info">
                     <div class="card-header">
                         <h3 class="card-title">Boy(cm)</h3>
@@ -40,7 +37,6 @@
                                          max-width: 100%;"></canvas>
                         </div>
                     </div>
-                    <!-- /.card-body -->
                 </div>
                 <div class="card card-info">
                     <div class="card-header">
@@ -55,7 +51,6 @@
                                          max-width: 100%;"></canvas>
                         </div>
                     </div>
-                    <!-- /.card-body -->
                 </div>
             </div>
             <div class="col-md-6">
@@ -73,7 +68,6 @@
                                          max-width: 100%;"></canvas>
                         </div>
                     </div>
-                    <!-- /.card-body -->
                 </div>
                 <div class="card card-info">
                     <div class="card-header">
@@ -89,17 +83,12 @@
                                          max-width: 100%;"></canvas>
                         </div>
                     </div>
-                    <!-- /.card-body -->
                 </div>
             </div>
-            <!-- /.col (RIGHT) -->
         </div>
-        <!-- /.row -->
     </div>
-    <!-- /.container-fluid -->
 </section>
 <script>
-    // Weight Chart
     var weightData = {
         labels: <?php echo $dates; ?>,
         datasets: [{
@@ -117,7 +106,6 @@
         data: weightData,
     });
 
-    // Height Chart
     var heightData = {
         labels: <?php echo $dates; ?>,
         datasets: [{
@@ -135,7 +123,6 @@
         data: heightData,
     });
 
-    // Body Fat Chart
     var bodyFatData = {
         labels: <?php echo $dates; ?>,
         datasets: [{
@@ -153,7 +140,6 @@
         data: bodyFatData,
     });
 
-    // Muscle Mass Chart
     var muscleMassData = {
         labels: <?php echo $dates; ?>,
         datasets: [{
@@ -171,7 +157,6 @@
         data: muscleMassData,
     });
 
-    // Body Mass Index Chart
     var bodyMassIndexData = {
         labels: <?php echo $dates; ?>,
         datasets: [{

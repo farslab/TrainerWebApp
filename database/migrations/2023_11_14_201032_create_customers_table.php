@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('customers', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('trainer_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('trainer_id')->constrained('trainers');
             $table->enum('customer_target', ['kilo_aldirma', 'kilo_verdirme', 'kilo_koruma', 'kas_kazanma']);
             $table->date('birth_date');
             $table->string('gender');

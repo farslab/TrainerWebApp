@@ -52,7 +52,12 @@ class UserController extends Controller
     }
     public function deleteUser(User $user)
     {
+        
+        if($user->hasRole('trainer')){
+            $user->trainer->customers()->delete();
+        }
         $user->delete();
+
         return redirect()->back()->with('success', 'Kullanıcı Başarıyla Silindi.');
 
     }
