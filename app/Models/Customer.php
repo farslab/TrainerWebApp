@@ -35,7 +35,7 @@ class Customer extends Model
     }
     public function progressRecords()
     {
-        return $this->hasMany(ProgressRecord::class)->orderBy('created_at','desc');
+        return $this->hasMany(ProgressRecord::class)->orderBy('created_at','asc');
     }
 
     public function nutritionPlan()
