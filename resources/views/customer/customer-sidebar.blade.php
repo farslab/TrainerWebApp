@@ -17,9 +17,9 @@
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <li class="nav-item">
           <a href="{{route('dashboard')}}" class="nav-link {{ Request::is('dashboard') ? 'active' : '' }}">
-            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <i class="nav-icon fas fa-chart-pie"></i>
             <p>
-              Genel Bakış
+              Gelişim İstatistikleri
             </p>
           </a>
         </li>
@@ -40,15 +40,7 @@
             </p>
           </a>
         </li>
-        <li class="nav-item">
-          <a href="{{route('graphics.index', auth()->user()->id)}}" class="{{Request::is('graphics-progress/'.auth()->user()->id)? 'active' : ''}} nav-link">
-            <i class="nav-icon fas fa-chart-pie"></i>
-            <p>
-              Gelişim İstatistikleri
-
-            </p>
-          </a>
-        </li>
+       
         <li class="nav-item">
           <a href="{{route('pr.index')}}" class="{{Request::is('create-new-pr')? 'active' : ''}} nav-link">
             <i class="nav-icon fas fa-plus"></i>

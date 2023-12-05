@@ -8,6 +8,7 @@ use App\Models\Customer;
 use App\Models\Trainer;
 use App\Models\NutritionPlan;
 use Illuminate\Validation\Rules;
+use Carbon\Carbon;
 use Exception;
 use Auth;
 
@@ -20,28 +21,34 @@ class UserController extends Controller
 
         if ($user->hasRole('admin')) {
 
-            return view('admin.admin-dashboard');
+            $trainers = Trainer::orderBy("created_at", "desc")->get();
+
+            return view('admin.trainers-table', compact('trainers'));
         } elseif ($user->hasRole('trainer')) {
+            $user = Auth::user();
             $customers = $user->trainer->customers;
 
-            $nutritionPlanCount=0;
-            $trainingProgramCount=0;
-            
-            foreach($customers as $customer){
-                if($customer->nutritionPlan){
-                    $nutritionPlanCount++;
-                }
-                if($customer->trainingPrograms){
-                    foreach($customer->trainingPrograms as $trainingProgram){
-                        $trainingProgramCount++;
-
-                    }
-                }
-            }
-
-            return view('trainer.trainer-dashboard', compact('customers', 'user','nutritionPlanCount','trainingProgramCount'));
+            return view('trainer.tCustomers', compact('customers'));
         } else {
-            return view('customer.customer-dashboard');
+            if ($user->id != auth()->user()->id && auth()->user()->id != $user->customer->trainer->user_id && ! auth()->user()->hasRole('admin')) {
+
+                $user = auth()->user();
+                return redirect()->route('graphics.index', $user->id);
+            } else {
+                setlocale(LC_TIME, 'tr_TR.utf8', 'tr_TR', 'tr');
+    
+                $dates = $user->customer->progressRecords->pluck('created_at')->map(function ($date) {
+                    return Carbon::parse($date)->format('d-m-y');
+                });
+                $weights = $user->customer->progressRecords->pluck('weight');
+                $heights = $user->customer->progressRecords->pluck('height');
+                $bodyFatPercentages = $user->customer->progressRecords->pluck('body_fat_percentage');
+                $muscleMasses = $user->customer->progressRecords->pluck('muscle_mass');
+                $bodyMassIndexes = $user->customer->progressRecords->pluck('body_mass_index');
+    
+                return view('customer.graphics-progress', compact('user', 'weights', 'heights', 'bodyFatPercentages', 'muscleMasses', 'bodyMassIndexes', 'dates'));
+    
+            }
         }
     }
     public function disableUser(User $user)
@@ -52,8 +59,8 @@ class UserController extends Controller
     }
     public function deleteUser(User $user)
     {
-        
-        if($user->hasRole('trainer')){
+
+        if ($user->hasRole('trainer')) {
             $user->trainer->customers()->delete();
         }
         $user->delete();

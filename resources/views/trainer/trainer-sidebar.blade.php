@@ -16,24 +16,14 @@
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <li class="nav-item">
           <a href="{{route('dashboard')}}" class="nav-link {{ Request::is('dashboard') ? 'active' : '' }}">
-            <i class="nav-icon fas fa-tachometer-alt"></i>
-            <p>
-              Genel Bakış
-            </p>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="{{route('t_customers')}}" class="nav-link {{ Request::is('t_customers') ? 'active' : '' }}">
             <i class="nav-icon fas fa-th"></i>
             <p>
-              Danışanlar
+              Danışan Listesi
               <span class="right badge badge-danger">
                 {{auth()->user()->trainer->customers->count()}}</span>
             </p>
           </a>
         </li>
-       
-
       </ul>
     </nav>
   </div>

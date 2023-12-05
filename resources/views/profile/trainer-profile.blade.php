@@ -10,17 +10,7 @@
             </div>
             <h3 class="profile-username text-center"><i class="fas fa-truck-container"></i> {{$user->name}}</h3>
             <p class="text-muted text-center">Antrenör</p>
-            <ul class="list-group list-group-unbordered mb-3">
-              <li class="list-group-item">
-                <b>Danışan</b> <a class="float-right">{{$user->trainer->customers->count()}}</a>
-              </li>
-              <li class="list-group-item">
-                <b>Antrenman Programları</b> <a class="float-right">543</a>
-              </li>
-              <li class="list-group-item">
-                <b>Beslenme Programları</b> <a class="float-right">13,287</a>
-              </li>
-            </ul>
+           
           </div>
         </div>
 
